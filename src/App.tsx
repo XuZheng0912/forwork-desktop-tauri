@@ -7,20 +7,24 @@ export default function App() {
 
     return (
         <div className="flex h-screen bg-gray-200">
-            <nav className={"flex flex-col w-32 bg-white"}>
-                {
-                    navMenuItems().map(item => (
-                        <NavLink to={item.path}
-                                 onClick={() => setActiveMenuItem(item.name)}
-                                 className={`rounded text-center mx-1 my-1 text-lg ${
-                                     activeMenuItem === item.name ? "bg-gray-500" : "hover:bg-gray-400 bg-gray-300"
-                                 }`}>
-                            {item.label}
-                        </NavLink>
-                    ))
-                }
-            </nav>
-            <Outlet/>
+            <div className={"w-1/4"}>
+                <nav className={"flex flex-col  bg-white"}>
+                    {
+                        navMenuItems().map(item => (
+                            <NavLink to={item.path}
+                                     onClick={() => setActiveMenuItem(item.name)}
+                                     className={`rounded text-center mx-1 my-1 text-lg ${
+                                         activeMenuItem === item.name ? "bg-gray-500" : "hover:bg-gray-400 bg-gray-300"
+                                     }`}>
+                                {item.label}
+                            </NavLink>
+                        ))
+                    }
+                </nav>
+            </div>
+            <div className={"w-3/4"}>
+                <Outlet/>
+            </div>
         </div>
     )
 }

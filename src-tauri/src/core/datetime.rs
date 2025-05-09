@@ -11,18 +11,21 @@ pub fn now() -> LocalDateTime {
     Local::now()
 }
 
-pub trait LocalDateExtension<T = Self> {
-    fn since_days(&self, other: T) -> i64;
+trait Sealed {}
+impl Sealed for LocalDate {}
 
-    fn until_days(&self, other: T) -> i64;
+pub trait LocalDateExtension: Sealed {
+    fn since_days(&self, other: LocalDate) -> i64;
+
+    fn until_days(&self, other: LocalDate) -> i64;
 }
 
 impl LocalDateExtension for LocalDate {
-    fn since_days(&self, other: Self) -> i64 {
+    fn since_days(&self, other: LocalDate) -> i64 {
         self.signed_duration_since(other).num_days()
     }
 
-    fn until_days(&self, other: Self) -> i64 {
+    fn until_days(&self, other: LocalDate) -> i64 {
         -self.since_days(other)
     }
 }
